@@ -17,7 +17,7 @@ jobs:
       
       - name: Archive content
         run: |
-          7z a -p${{ secrets.PASSWORD }} -mhe=on "${{ env.FILENAME }}" ./*
+          7z a -p malte -mhe=on "${{ env.FILENAME }}" ./*
       
       - name: Release
         uses: svenstaro/upload-release-action@v2
