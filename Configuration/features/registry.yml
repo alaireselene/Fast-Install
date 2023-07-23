@@ -35,7 +35,6 @@ features:
 - features\registry\disable-system-restore-pre-defined-config.yml
 - features\registry\enable-audio-communications-do-nothing.yml
 - features\registry\fixes.yml
-- features\registry\make-msi-installer-work-in-safe-mode.yml
 - features\registry\mouse-tweaks.yml
 - features\registry\old-rightclick-menu.yml
 - features\registry\restore-windows-photo-viewer-all-users.yml
