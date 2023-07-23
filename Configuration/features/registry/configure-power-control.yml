@@ -1,0 +1,15 @@
+---
+title: configure-power-control
+description: configure-power-control
+privilege: TrustedInstaller
+actions:
+
+    # ============
+    # === Main ===
+    # ============
+
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings', value: 'ShowSleepOption', type: REG_DWORD, data: '1'}
+    # === Allow system to be shut down without having to log on - Enabled
+    # ------> https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/shutdown-allow-system-to-be-shut-down-without-having-to-log-on
+    # ------> https://www.stigviewer.com/stig/windows_server_2012_member_server/2014-01-07/finding/V-1075
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ShutdownWithoutLogon', type: REG_DWORD, data: '1'}

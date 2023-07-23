@@ -1,0 +1,17 @@
+﻿<Configuration>
+  <Add OfficeClientEdition="64" Channel="Current" AllowCdnFallback="true">
+    <Product ID="O365ProPlusRetail">
+      <Language ID="en-us" />
+      <ExcludeApp ID="Access" />
+      <ExcludeApp ID="Bing" />
+      <ExcludeApp ID="Groove" />
+      <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="OneDrive" />
+      <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Publisher" />
+    </Product>
+    <Product ID="ProofingTools">
+      <Language ID="vi-vn" />
+    </Product>
+  </Add>
+</Configuration>

@@ -1,0 +1,15 @@
+---
+title: Tuỳ biến
+description: Các tuỳ biến bổ sung
+privilege: Admin
+actions: []
+features:
+- features\start.yml
+- features\services.yml
+- features\appx.yml
+- features\components.yml
+- features\packages.yml
+- features\registry.yml
+- features\revert.yml
+- features\config.yml
+- features\winget.yml

@@ -1,0 +1,67 @@
+---
+title: Tinh chỉnh
+description: Tinh chỉnh hiệu suất và tăng tốc Windows
+privilege: TrustedInstaller
+actions:
+  - !taskKill: {name: "explorer"}
+  - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod"', showOutput: false, showError: false}
+
+  - !writeStatus: {status: "Cấu hình nguồn điện và pin"}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling', value: 'PowerThrottlingOff', type: REG_DWORD, data: '0'}
+
+  - !writeStatus: {status: "Cấu hình khởi động"}
+  - !run: {exe: 'bcdedit', args: '/deletevalue useplatformclock', showOutput: false, showError: false}
+    # bcdedit /set useplatformtick yes
+  - !run: {exe: 'bcdedit', args: '/set disabledynamictick yes', showOutput: false, showError: false}
+  - !run: {exe: 'bcdedit', args: '/set bootmenupolicy Legacy', showOutput: false, showError: false}
+  - !run: {exe: 'bcdedit', args: '/set lastknowngood yes', showOutput: false, showError: false}
+
+  - !writeStatus: {status: "Tối ưu NTFS"}
+  - !run: {exe: 'fsutil', args: 'behavior set disableLastAccess 1', showOutput: false}
+  - !run: {exe: 'fsutil', args: 'behavior set disable8dot3 1', showOutput: false}
+
+  - !writeStatus: {status: "Cấu hình kết nối mạng"}
+  - !run: {exe: 'netsh', args: 'interface Teredo set state type=default', showOutput: false, showError: false}
+  - !run: {exe: 'netsh', args: 'interface Teredo set state servername=default', showOutput: false, showError: false}
+  - !run: {exe: 'netsh', args: 'int tcp set supplemental internet congestionprovider=bbr2', showOutput: false, showError: false}
+
+  - !writeStatus: {status: "Cấu hình cài đặt Windows"}
+  - !run: {exe: 'net', args: 'accounts /maxpwage:unlimited', showOutput: false}
+  - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\Session Manager', value: 'HeapDeCommitFreeBlockThreshold', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', value: '', type: REG_SZ, data: ''}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications', value: 'GlobalUserDisabled', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKCU\Control Panel\International\User Profile', value: 'HttpAcceptLanguageOptOut', type: REG_DWORD, data: '1'}
+
+    # Add Task Manager to taskbar right click
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\4\1887869580', value: 'EnabledState', type: REG_DWORD, data: '2'}
+  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\4\1887869580', value: 'EnabledStateOptions', type: REG_DWORD, data: '0'}
+
+    # Remove Widget button, only useful for the final explorer restart, since it will still show otherwise until the system is restarted.
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarDa', type: REG_DWORD, data: '0'}
+
+  - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Rename-Computer -NewName $env:computername"', showOutput: false, showError: false}
+  - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Disable-MMAgent -mc"', showOutput: false, showError: false}
+  - !run: {exe: 'PowerShell', args: '-NonInteractive -NoLogo -NoProfile -Command "Disable-WindowsErrorReporting"', showOutput: false, showError: false}
+  - !run: {exe: 'powershell', args: '-NonInteractive -NoLogo -NoProfile Set-ProcessMitigation -Name vgc.exe -Enable CFG', showOutput: false}
+  - !cmd: {exeDir: true, command: '@echo Disable-MMAgent -MC; ForEach($v in (Get-Command -Name "Set-ProcessMitigation").Parameters["Disable"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString().Replace(" ", "").Replace("`n", "")}; rm $PSCommandPath> MC_PM.ps1'}
+  - !run: {exeDir: true, exe: 'powershell', args: '-windowstyle hidden -ExecutionPolicy Bypass -C "& ''./MC_PM.ps1''"'}
+  - !run: {exe: 'setx', args: 'DOTNET_CLI_TELEMETRY_OPTOUT 1'}
+  - !run: {exe: 'setx', args: 'POWERSHELL_TELEMETRY_OPTOUT 1'}
+
+    # OneDrive workaround
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows\OneDrive', value: 'DisableFileSyncNGSC', operation: delete}
+
+    # Remove Update Health
+  - !run: {exeDir: true, exe: "RemoveUpdateHealth.bat", weight: 25}
+
+    # Remove Web Thread Defend
+  - !run: {exeDir: true, exe: "RemoveWebThreadDef.bat", weight: 25}
+
+    # Memory Configuration
+  - !run: {exeDir: true, exe: "MemoryConfig.bat", weight: 25}
+
+    # Update root certificates
+    !PowerShell: {command: '& {$tmp = (New-TemporaryFile).FullName; CertUtil -generateSSTFromWU -f $tmp; if ( (Get-Item $tmp | Measure-Object -Property Length -Sum).sum -gt 0 ) { $SST_File = Get-ChildItem -Path $tmp; $SST_File | Import-Certificate -CertStoreLocation "Cert:\LocalMachine\Root"; $SST_File | Import-Certificate -CertStoreLocation "Cert:\LocalMachine\AuthRoot" } Remove-Item -Path $tmp}'}

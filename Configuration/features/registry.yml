@@ -1,0 +1,41 @@
+---
+title: Registry
+description: Cấu hình registry
+privilege: TrustedInstaller
+actions: []
+features:
+- features\registry\ntlite-settings.yml
+- features\registry\add-take-ownership-in-context-menu.yml
+- features\registry\bypass-requirements.yml
+- features\registry\configure-crash-control.yml
+- features\registry\configure-deprovisioned-apps.yml
+- features\registry\configure-explorer-folder-view.yml
+- features\registry\configure-explorer-settings.yml
+- features\registry\configure-ifeo.yml
+- features\registry\configure-internet-explorer.yml
+- features\registry\configure-kernel.yml
+- features\registry\configure-logon.yml
+- features\registry\configure-microsoft-store.yml
+- features\registry\configure-multimedia.yml
+- features\registry\configure-oobe.yml
+- features\registry\configure-power-control.yml
+- features\registry\configure-privacy.yml
+- features\registry\configure-search-and-cortana.yml
+- features\registry\configure-security.yml
+- features\registry\configure-start-menu-and-taskbar-notifications).yml
+- features\registry\configure-win32priorityseparation.yml
+- features\registry\configure-windows-settings.yml
+- features\registry\configure-windows-update-and-install.yml
+- features\registry\disable-automatic-maintenance.yml
+- features\registry\disable-disk-checking.yml
+- features\registry\disable-ease-of-access-features.yml
+- features\registry\disable-installing-teams.yml
+- features\registry\disable-logging.yml
+- features\registry\disable-prefetcher-superfetch-and-readyboost.yml
+- features\registry\disable-system-restore-pre-defined-config.yml
+- features\registry\enable-audio-communications-do-nothing.yml
+- features\registry\fixes.yml
+- features\registry\make-msi-installer-work-in-safe-mode.yml
+- features\registry\mouse-tweaks.yml
+- features\registry\old-rightclick-menu.yml
+- features\registry\restore-windows-photo-viewer-all-users.yml
