@@ -1,51 +1,49 @@
----
 title: Khởi động
 description: Chuẩn bị các bước cơ bản để tiến hành cấu hình
 privilege: TrustedInstaller
 actions:
+- !writeStatus: {status: "Dọn thư mục WinSxS",}
 
-  - !writeStatus: {status: "Dọn thư mục WinSxS"}
+- !cmd:
+  exeDir: true
+  command: "DISM /Online /Cleanup-Image /StartComponentCleanup"
+  # command: 'DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase'
+  weight: 250
 
-  - !cmd:
-    exeDir: true
-    command: 'DISM /Online /Cleanup-Image /StartComponentCleanup'
-    # command: 'DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase'
-    weight: 250
+- !service:
+  name: "wuauserv"
+  operation: stop
 
-  - !service:
-    name: "wuauserv"
-    operation: stop
+- !service:
+  name: "bits"
+  operation: stop
+- !service:
+  name: "appidsvc"
+  operation: stop
+- !service:
+  name: "cryptsvc"
+  operation: stop
+- !file:
+  path: "%windir%\\SoftwareDistribution"
+  weight: 20
 
-  - !service:
-    name: "bits"
-    operation: stop
-  - !service:
-    name: "appidsvc"
-    operation: stop
-  - !service:
-    name: "cryptsvc"
-    operation: stop
-  - !file:
-    path: "%windir%\\SoftwareDistribution"
-    weight: 20
+- !writeStatus: {status: "Tắt cập nhật Driver..."}
+- !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate', value: "ExcludeWUDriversInQualityUpdate", type: REG_DWORD, data: "1",}
 
-  - !writeStatus: {status: "Tắt cập nhật Driver..."}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate', value: 'ExcludeWUDriversInQualityUpdate', type: REG_DWORD, data: '1'}
+- !writeStatus: {status: "Cấu hình DISM",}
 
-  - !writeStatus: {status: "Cấu hình DISM"}
-    
-  - !cmd: {command: 'DISM /Online /Enable-Feature /FeatureName:"LegacyComponents" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Enable-Feature /FeatureName:"DirectPlay" /NoRestart', weight: 30}
+- !cmd: {command: 'DISM /Online /Enable-Feature /FeatureName:"LegacyComponents" /NoRestart', weight: 30}
+- !cmd: {command: 'DISM /Online /Enable-Feature /FeatureName:"DirectPlay" /NoRestart', weight: 30,}
 
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2Root" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"WorkFolders-Client" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Printing-Foundation-Features" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Printing-Foundation-InternetPrinting-Client" /NoRestart', weight: 30}
+- !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2Root" /NoRestart', weight: 30}
+- !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MicrosoftWindowsPowerShellV2" /NoRestart', weight: 30}
+- !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"WorkFolders-Client" /NoRestart', weight: 30}
+- !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Printing-Foundation-Features" /NoRestart', weight: 30}
+- !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Printing-Foundation-InternetPrinting-Client" /NoRestart', weight: 30,}
 # - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"Windows-Defender-Default-Definitions" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"SmbDirect" /NoRestart', weight: 30}
-  - !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MSRDC-Infrastructure" /NoRestart', weight: 30}
+- !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"SmbDirect" /NoRestart', weight: 30}
+- !cmd: {command: 'DISM /Online /Disable-Feature /FeatureName:"MSRDC-Infrastructure" /NoRestart', weight: 30,}
 
-  - !service:
-    name: "wuauserv"
-    operation: stop
+- !service:
+  name: "wuauserv"
+  operation: stop

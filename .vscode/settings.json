@@ -1,0 +1,7 @@
+{
+  "yaml.customTags": [
+    "!writeStatus mapping",
+    "!powerShell mapping",
+    "!run mapping"
+  ]
+}
