@@ -2,45 +2,100 @@ title: Khởi tạo
 description: Cài đặt môi trường sử dụng hoàn chỉnh
 privilege: TrustedInstaller
 actions:
-- !service:
-  name: "wuauserv"
-  operation: stop
+  - !service:
+    name: "wuauserv"
+    operation: stop
 
-- !writeStatus: {status: "Cài đặt các bộ thư viện..."}
-- !powerShell: {command: "winget install Microsoft.VCRedist.2008.x64 -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install Microsoft.VCRedist.2010.x64 -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install Microsoft.VCRedist.2012.x64 -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install Microsoft.VCRedist.2013.x64 -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install Microsoft.VCRedist.2015+.x64 -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install Microsoft.DotNet.Framework.DeveloperPack_4",}
+  - !writeStatus: { status: "Cài đặt các bộ thư viện..." }
+  - !powerShell: {
+      command: "winget install Microsoft.VCRedist.2008.x64 -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install Microsoft.VCRedist.2010.x64 -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install Microsoft.VCRedist.2012.x64 -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install Microsoft.VCRedist.2013.x64 -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install Microsoft.VCRedist.2015+.x64 -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install Microsoft.DotNet.Framework.DeveloperPack_4",
+    }
 
-- !writeStatus: {status: "Cài đặt môi trường code..."}
-- !powerShell: {command: "winget install Microsoft.VisualStudioCode -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install Git.Git -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install CoreyButler.NVMforWindows -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install CondaForge.Mambaforge -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install Figma.Figma -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install Figma.FigmaAgent -e -h --accept-package-agreements --accept-source-agreements",}
+  - !writeStatus: { status: "Cài đặt môi trường code..." }
+  - !powerShell: {
+      command: "winget install Microsoft.VisualStudioCode -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install Git.Git -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install CoreyButler.NVMforWindows -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install CondaForge.Mambaforge -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install Figma.Figma -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install Figma.FigmaAgent -e -h --accept-package-agreements --accept-source-agreements",
+    }
 
-- !writeStatus: {status: "Cài đặt Microsoft Office 365..."}
-- !powerShell: {command: "winget install Microsoft.Teams -e -h --accept-package-agreements --accept-source-agreements"}
-- !run: {exe: "OfficeSetup.exe", args: "/configure OfficeConf.xml", 'exeDir:true': '', 'weight:30': '',}
+  - !writeStatus: { status: "Cài đặt Microsoft Office 365..." }
+  - !powerShell: {
+      command: "winget install Microsoft.Teams -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !run: {
+      exe: "OfficeSetup.exe",
+      args: "/configure OfficeConf.xml",
+      exeDir: true,
+      weight: 30,
+    }
 
-- !writeStatus: {status: "Cài đặt các tiện ích..."}
-- !powerShell: {command: "winget install Microsoft.PowerToys -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install 9PF4KZ2VN4W9 -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install File-New-Project.EarTrumpet -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install Microsoft.powerShell -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install voidtools.Everything -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install Giorgiotani.Peazip -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install DucFabulous.UltraViewer -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install FxSoundLLC.FxSound -e -h --accept-package-agreements --accept-source-agreements",}
+  - !writeStatus: { status: "Cài đặt các tiện ích..." }
+  - !powerShell: {
+      command: "winget install Microsoft.PowerToys -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install 9PF4KZ2VN4W9 -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install File-New-Project.EarTrumpet -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install Microsoft.powerShell -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install voidtools.Everything -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install Giorgiotani.Peazip -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install DucFabulous.UltraViewer -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install FxSoundLLC.FxSound -e -h --accept-package-agreements --accept-source-agreements",
+    }
 
-- !writeStatus: {status: "Cài đặt Zalo với Darkmode..."}
-- !powerShell: {command: "winget install VNGCorp.Zalo -e -h --accept-package-agreements --accept-source-agreements"}
-- !run: {exe: "ZaDark.exe", 'exeDir:true': '', 'weight:30': '',}
+  - !writeStatus: { status: "Cài đặt Zalo với Darkmode..." }
+  - !powerShell: {
+      command: "winget install VNGCorp.Zalo -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !run: { exe: "ZaDark.exe", "exeDir:true": "", "weight:30": "" }
 
-- !writeStatus: {status: "Sắp hoàn tất..."}
-- !powerShell: {command: "winget install OBSProject.OBSStudio -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install ArmCord.ArmCord -e -h --accept-package-agreements --accept-source-agreements"}
-- !powerShell: {command: "winget install Spotify.Spotify -e -h --accept-package-agreements --accept-source-agreements"}
+  - !writeStatus: { status: "Sắp hoàn tất..." }
+  - !powerShell: {
+      command: "winget install OBSProject.OBSStudio -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install ArmCord.ArmCord -e -h --accept-package-agreements --accept-source-agreements",
+    }
+  - !powerShell: {
+      command: "winget install Spotify.Spotify -e -h --accept-package-agreements --accept-source-agreements",
+    }
