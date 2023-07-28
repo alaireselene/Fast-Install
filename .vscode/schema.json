@@ -1,0 +1,192 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Ameliorated Playbook",
+  "description": "JSON schema for Ameliorated Playbook configuration files",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "description": "Title of the feature which you are working in",
+      "type": "string"
+    },
+    "description": {
+      "description": "Description of the feature which you are working in",
+      "type": "string"
+    },
+    "privilege": {
+      "description": "Privilege level required to run the feature",
+      "type": "string",
+      "enum": ["TrustedInstaller"]
+    },
+    "actions": {
+      "description": "List of 'commands' for AME Wizard to execute",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "!run": {
+            "description": "Runs a specified executable or file.",
+            "type": "object",
+            "properties": {
+              "exe": {
+                "description": "Specifies the executable filename, and can optionally include the full path.",
+                "type": "string"
+              }
+            },
+            "additionalProperties": {
+              "path": {
+                "description": "Path to the executable or file to run.",
+                "type": "string"
+              },
+              "args": {
+                "description": "Arguments to pass to the executable or file.",
+                "type": "string"
+              },
+              "wait": {
+                "description": "Whether to wait for the executable or file to finish running before continuing.",
+                "type": "boolean"
+              },
+              "baseDir": {
+                "description": "Creates the process with the amelioration directory as its working directory.",
+                "type": "boolean"
+              },
+              "exeDir": {
+                "description": "Creates the process with the Playbook executables folder as its working directory.",
+                "type": "boolean"
+              },
+              "timeout": {
+                "description": "Specifies a timeout for the process, where it will kill the process and report an error if the timeout is reached.",
+                "type": "integer"
+              },
+              "showOutput": {
+                "description": "Whether to show the standareOutput of the process in the output log.",
+                "type": "boolean"
+              },
+              "showError": {
+                "description": "Whether to show the standardError of the process in the output log.",
+                "type": "boolean"
+              }
+            }
+          },
+          "!registryKey": {
+            "description": "Adds or deletes a specified registry key.",
+            "type": "object",
+            "properties": {
+              "path": {
+                "description": "Path to the registry key to add or delete.",
+                "type": "string"
+              }
+            },
+            "additionalProperties": {
+              "operation": {
+                "description": "Whether to add or delete the registry key.",
+                "type": "string",
+                "enum": ["add", "delete"]
+              },
+              "scope": {
+                "description": "Whether to add or delete the registry key for the current user or all users.",
+                "type": "string",
+                "enum": [
+                  "currentUser",
+                  "allUsers",
+                  "activeUsers",
+                  "defaultUsers"
+                ]
+              }
+            }
+          },
+          "!registryValue": {
+            "description": "Adds, deletes, or modifies a specified registry value.",
+            "type": "object",
+            "properties": {
+              "path": {
+                "description": "Path to the registry value to add, delete, or modify.",
+                "type": "string"
+              },
+              "value": {
+                "description": "Value to set the registry value to.",
+                "type": "string"
+              },
+              "type": {
+                "description": "Type of the registry value.",
+                "type": "string",
+                "enum": [
+                  "REG_SZ",
+                  "REG_MULTI_SZ",
+                  "REG_EXPAND_SZ",
+                  "REG_DWORD",
+                  "REG_QWORD",
+                  "REG_BINARY",
+                  "REG_NONE",
+                  "REG_UNKNOWN"
+                ]
+              },
+              "data": {
+                "description": "Data to set the registry value to.",
+                "type": [
+                  "number",
+                  "string",
+                  "boolean",
+                  "object",
+                  "array",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": {
+              "operation": {
+                "description": "Whether to add, delete, or modify the registry value.",
+                "type": "string",
+                "enum": ["add", "delete", "set"]
+              },
+              "scope": {
+                "description": "Whether to add, delete, or modify the registry value for the current user or all users.",
+                "type": "string",
+                "enum": [
+                  "currentUser",
+                  "allUsers",
+                  "activeUsers",
+                  "defaultUsers"
+                ]
+              }
+            }
+          },
+          "!appx": {
+            "description": "Removes a specified APPX family, package, or app. This can also clear the cache of a given APPX package.",
+            "type": "object",
+            "properties": {
+              "name": {
+                "description": "Name of the APPX family, package, or app to remove. This supports a wildcard (*) on either side of the string, or both sides.",
+                "type": "string"
+              }
+            },
+            "additionalProperties": {
+              "operation": {
+                "description": "Whether to remove the APPX family, package, or app, or clear the cache of the APPX package.",
+                "type": "string",
+                "enum": ["remove", "clearCache"]
+              },
+              "type_pending_to_rename": {
+                "description": "Whether to remove the APPX family, package, or app for the current user or all users.",
+                "type": "string",
+                "enum": ["currentUser", "allUsers"]
+              },
+              "verboseOutput": {
+                "description": "Whether to show verbose output from the PowerShell command to output log.",
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "features": {
+      "description": "List of features to be installed",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "uniqueItems": true
+      }
+    }
+  }
+}

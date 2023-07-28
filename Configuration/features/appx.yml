@@ -2,62 +2,64 @@ title: APPX
 description: Xoá bỏ một số ứng dụng mặc định của Windows
 privilege: TrustedInstaller
 actions:
-- !service:
-  name: "wuauserv"
-  operation: stop
+  - !service:
+    name: "wuauserv"
+    operation: stop
 
-- !writeStatus: {status: "Đang xoá các ứng dụng rác"}
-- !appx: {name: "*Disney*", type: family}
-- !appx: {name: "*OneDrive*", type: family}
-- !appx: {name: "*Spotify*", type: family}
-- !appx: {name: "*SecureAssessmentBrowser*", type: family}
-- !appx: {name: "*PeopleExperienceHost*", type: family}
-- !appx: {name: "*Microsoft.WindowsCamera*", type: family}
-- !appx: {name: "*MicrosoftWindows.Client.WebExperience*", type: family}
-- !appx: {name: "*Microsoft.WindowsMaps*", type: family}
-- !appx: {name: "*Microsoft.MicrosoftStickyNotes*", type: family}
-- !appx: {name: "*microsoft.windowscommunicationsapps*", type: family}
-- !appx: {name: "*Microsoft.People*", type: family}
-- !appx: {name: "*Microsoft.BingNews*", type: family}
-- !appx: {name: "*Microsoft.BingWeather*", type: family}
-- !appx: {name: "*Microsoft.MicrosoftSolitaireCollection*", type: family}
-- !appx: {name: "*Microsoft.MicrosoftOfficeHub*", type: family}
-- !appx: {name: "*Microsoft.WindowsFeedbackHub*", type: family}
-- !appx: {name: "*Microsoft.GetHelp*", type: family}
-- !appx: {name: "*Microsoft.Getstarted*", type: family}
-- !appx: {name: "*Microsoft.Todos*", type: family}
-- !appx: {name: "*Microsoft.PowerAutomateDesktop*", type: family,}
-# Cortana
-- !appx: {name: "*Microsoft.549981C3F5F10*", type: family}
-- !appx: {name: "*MicrosoftCorporationII.QuickAssist*", type: family}
-- !appx: {name: "*MicrosoftCorporationII.MicrosoftFamily*", type: family}
-- !appx: {name: "*Microsoft.ZuneMusic*", type: family}
-- !appx: {name: "*Microsoft.ZuneVideo*", type: family}
-- !appx: {name: "*Microsoft.WindowsSoundRecorder*", type: family}
-- !appx: {name: "*Clipchamp.Clipchamp*", type: family}
-- !appx: {name: "*Microsoft.Whiteboard*", type: family}
-- !appx: {name: "*microsoft.microsoftskydrive*", type: family}
-- !appx: {name: "*Microsoft.MicrosoftTeamsforSurfaceHub*", type: family}
-- !appx: {name: "*MicrosoftCorporationII.MailforSurfaceHub*", type: family}
-- !appx: {name: "*Microsoft.MicrosoftPowerBIForWindows*", type: family}
-- !appx: {name: "*Microsoft.SkypeApp*", type: family}
-- !appx: {name: "*Microsoft.Office.Excel*", type: family}
-- !appx: {name: "*Microsoft.Office.PowerPoint*", type: family}
-- !appx: {name: "*Microsoft.Office.Word*", type: family}
-- !appx: {name: "*Microsoft.Office.OneNote*", type: family}
-- !appx: {name: "*Microsoft.Microsoft3DViewer*", type: family}
-- !appx: {name: "Microsoft.Advertising*", type: family}
-- !appx: {name: "*MixedReality.Portal*", type: family,}
+  - !writeStatus: {
+      status: "\u0110\u0061\u006E\u0067\u0020\u0078\u006F\u00E1\u0020\u0063\u00E1\u0063\u0020\u1EE9\u006E\u0067\u0020\u0064\u0075\u006E\u0067\u0020\u0072\u00E1\u0063",
+    }
+  - !appx: { name: "*Disney*", type: family }
+  - !appx: { name: "*OneDrive*", type: family }
+  - !appx: { name: "*Spotify*", type: family }
+  - !appx: { name: "*SecureAssessmentBrowser*", type: family }
+  - !appx: { name: "*PeopleExperienceHost*", type: family }
+  - !appx: { name: "*Microsoft.WindowsCamera*", type: family }
+  - !appx: { name: "*MicrosoftWindows.Client.WebExperience*", type: family }
+  - !appx: { name: "*Microsoft.WindowsMaps*", type: family }
+  - !appx: { name: "*Microsoft.MicrosoftStickyNotes*", type: family }
+  - !appx: { name: "*microsoft.windowscommunicationsapps*", type: family }
+  - !appx: { name: "*Microsoft.People*", type: family }
+  - !appx: { name: "*Microsoft.BingNews*", type: family }
+  - !appx: { name: "*Microsoft.BingWeather*", type: family }
+  - !appx: { name: "*Microsoft.MicrosoftSolitaireCollection*", type: family }
+  - !appx: { name: "*Microsoft.MicrosoftOfficeHub*", type: family }
+  - !appx: { name: "*Microsoft.WindowsFeedbackHub*", type: family }
+  - !appx: { name: "*Microsoft.GetHelp*", type: family }
+  - !appx: { name: "*Microsoft.Getstarted*", type: family }
+  - !appx: { name: "*Microsoft.Todos*", type: family }
+  - !appx: { name: "*Microsoft.PowerAutomateDesktop*", type: family }
+  # Cortana
+  - !appx: { name: "*Microsoft.549981C3F5F10*", type: family }
+  - !appx: { name: "*MicrosoftCorporationII.QuickAssist*", type: family }
+  - !appx: { name: "*MicrosoftCorporationII.MicrosoftFamily*", type: family }
+  - !appx: { name: "*Microsoft.ZuneMusic*", type: family }
+  - !appx: { name: "*Microsoft.ZuneVideo*", type: family }
+  - !appx: { name: "*Microsoft.WindowsSoundRecorder*", type: family }
+  - !appx: { name: "*Clipchamp.Clipchamp*", type: family }
+  - !appx: { name: "*Microsoft.Whiteboard*", type: family }
+  - !appx: { name: "*microsoft.microsoftskydrive*", type: family }
+  - !appx: { name: "*Microsoft.MicrosoftTeamsforSurfaceHub*", type: family }
+  - !appx: { name: "*MicrosoftCorporationII.MailforSurfaceHub*", type: family }
+  - !appx: { name: "*Microsoft.MicrosoftPowerBIForWindows*", type: family }
+  - !appx: { name: "*Microsoft.SkypeApp*", type: family }
+  - !appx: { name: "*Microsoft.Office.Excel*", type: family }
+  - !appx: { name: "*Microsoft.Office.PowerPoint*", type: family }
+  - !appx: { name: "*Microsoft.Office.Word*", type: family }
+  - !appx: { name: "*Microsoft.Office.OneNote*", type: family }
+  - !appx: { name: "*Microsoft.Microsoft3DViewer*", type: family }
+  - !appx: { name: "Microsoft.Advertising*", type: family }
+  - !appx: { name: "*MixedReality.Portal*", type: family }
 
-# Paint 3D
-- !appx: {name: "*Microsoft.MSPaint*", type: family,}
+  # Paint 3D
+  - !appx: { name: "*Microsoft.MSPaint*", type: family }
 
-# Get Started app
-- !appx: {name: "*WebExperienceHost*", type: app,}
+  # Get Started app
+  - !appx: { name: "*WebExperienceHost*", type: app }
 
-- !appx: {name: "*MicrosoftTeams*", type: family,}
+  - !appx: { name: "*MicrosoftTeams*", type: family }
 
-# Necessary to refresh start menu entries etc.
-- !appx: {operation: clearCache, name: "*Client.CBS*"}
-- !appx: {operation: clearCache, name: "*StartMenuExperienceHost*"}
-- !appx: {operation: clearCache, name: "*Windows.Search*"}
+  # Necessary to refresh start menu entries etc.
+  - !appx: { operation: clearCache, name: "*Client.CBS*" }
+  - !appx: { operation: clearCache, name: "*StartMenuExperienceHost*" }
+  - !appx: { operation: clearCache, name: "*Windows.Search*" }

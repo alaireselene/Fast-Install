@@ -87,7 +87,7 @@ actions:
   - !powerShell: {
       command: "winget install VNGCorp.Zalo -e -h --accept-package-agreements --accept-source-agreements",
     }
-  - !run: { exe: "ZaDark.exe", "exeDir:true": "", "weight:30": "" }
+  - !run: { exe: "ZaDark.exe", exeDir: true, weight: 30 }
 
   - !writeStatus: { status: "Sắp hoàn tất..." }
   - !powerShell: {

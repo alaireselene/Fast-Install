@@ -1,7 +1,22 @@
 {
   "yaml.customTags": [
-    "!writeStatus mapping",
-    "!powerShell mapping",
-    "!run mapping"
-  ]
+    "!writeStatus: mapping",
+    "!powerShell: mapping",
+    "!run: mapping",
+    "!service: mapping",
+    "!scheduledTask: mapping",
+    "!taskKill: mapping",
+    "!systemPackage: mapping",
+    "!cmd: mapping",
+    "!powershell: mapping",
+    "!writeStatus: mapping",
+    "!appx: mapping",
+    "!registryKey: mapping",
+    "!registryValue: mapping",
+    "!file: mapping"
+  ],
+  "yaml.format.singleQuote": true,
+  "yaml.schemas": {
+    "file:///c%3A/Users/Sena/source/repos/Fast-Install/.vscode/schema.json": "file:///c%3A/Users/Sena/source/repos/Fast-Install/Configuration/features/*.yml"
+  }
 }
